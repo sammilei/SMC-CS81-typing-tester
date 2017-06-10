@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<title>Testing Your Typing Skill</title>
+<style>
+table {
+	border-collapse: collapse;
+	width: 30%;
+}
+
+th, td {
+	padding: 5px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+div {
+	position: relative;
+}
+
+#article2follow {
+	float: center;
+}
+
+textarea {
+	background-color: white;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 14px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color: #28B463;
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 3px #CFA7B2;
+}
+
+.button:hover {
+	background-color: #F4D03F
+}
+
+.button:active {
+	background-color: #A9DFBF;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+</style>
+</head>
+<body>
+	<script type="text/javascript" src="TypeTester.js">
+		
+	</script>
+	<h1>Testing Your Typing Skill</h1>
+	<div id="toolbar">
+		<table>
+			<tr>
+				<td><select id="mode">
+						<option value="Customize">Customize</option>
+						<option value="Default">Default</option>
+				</select> <font size="3" color="black">Text Mode</font></td>
+				<td><select id="time">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+				</select> <font size="3" color="black">Minutes</font></td>
+				<td>
+					<button type="button" id="submitChoice">Set Up</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="customize_text_input">
+		<textarea id="article_area" disabled rows="10" cols="70"></textarea>
+		<p></p>
+		<button class = 'button' type="button" id="submit_text">Submit</button>
+	</div>
+</body>
+</html>
