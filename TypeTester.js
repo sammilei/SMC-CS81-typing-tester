@@ -69,7 +69,8 @@ $(document).ready(function() {
 	/**
 	 * typingTest.html
 	 */	
-	$("#article").text(text_article);
+//	$("#article").text(text_article);
+	$("#article2follow").html(text_article);
 	$("#typing").click(function() {
 		if(click_2_start == true){
 			//change the textarea style
@@ -90,17 +91,25 @@ $(document).ready(function() {
 				remaining_time = Math.floor((end - now)/1000);
 				if(remaining_time <= 0){
 					clearInterval(countdown);//clear the setInterval
+					//store result for the result page
 					sessionStorage.setItem("accuracy", accuracy);
 					sessionStorage.setItem("error", num_of_error);
+					//direct to result page 
 					window.location.replace("result.html");
 				}else{
 					$("#timeLeft").text(remaining_time);
 					if(finished_one_word == true){//only process once a complete word is done by recognizing the space bar is pressed
-						typeIn_by_word = $("#typing").text().trim().split(/\s+/);
+						typeIn_by_word = $("#typing").val().trim().split(/\s+/);
+				
+						
 						comparingTyping();
 						$("#article").text("");
-						$("#article").append(new_text);
-						//$("#typing").text("");
+						//$("#article").append(new_text);
+						$("#article2follow").html(new_text);
+						
+						
+						
+//						$("#typing").text("");
 						//$("#typing").append(new_typeIn);
 						//reset the cursor position
 //						$('textarea').focus();
@@ -138,21 +147,23 @@ var new_text;
 var new_typeIn;
 function comparingTyping(){
 	var text_for_article = "";//next formatted text
-	var text_for_input = "";
+//	var text_for_input = "";
 	var error = 0;//error counter
 	for(var i = 0; i < typeIn_by_word.length; i++){
 		if(typeIn_by_word[i] != article_by_word[i]){
 			error ++;
-			text_for_input += "<u>" + typeIn_by_word[i] + "</u>" + " " ;
+			text_for_article += "<span style='color:red'>" + article_by_word[i] + "</span>" + " " ;
 		}else{
-			text_for_input += typeIn_by_word[i] + " ";
+			//color each finished word
+			text_for_article += "<span style='color:grey'>" + article_by_word[i] + "</span>" + " ";
 		}
-		//color each finished word
-		text_for_article += "<span style='color:grey'>" + article_by_word[i] + "</span>" + " ";
+		if(i == typeIn_by_word.length - 1){
+			//color ongoing word
+			text_for_article += "<span style='color:blue'>" + article_by_word[i + 1] + "</span>" + " ";
+		}
 	}
 
-	//color ongoing word
-	text_for_article += "<span style='color:blue'>" + article_by_word[typeIn_by_word.length] + "</span>" + " ";
+	
 	//copy all rest of word to text
 	for(var i = typeIn_by_word.length + 1; i < article_by_word.length; i++){
 		text_for_article += article_by_word[i] + " ";
@@ -160,7 +171,7 @@ function comparingTyping(){
 	//updates
 	num_of_error = error;
 	new_text = text_for_article;
-	new_typeIn = text_for_input;
+	new_typeIn = $('#typing');//
 }
 
 
