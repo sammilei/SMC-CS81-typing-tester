@@ -6,9 +6,16 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>Testing Your Typing Skill</title>
 <style>
+body {
+	background-color: #5F9EA0;
+	background-image: url(bg.png);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}
+
 table {
 	border-collapse: collapse;
-	width: 30%;
+	width: 35%;
 }
 
 th, td {
@@ -21,12 +28,14 @@ div {
 	position: relative;
 }
 
-#article2follow {
-	float: center;
-}
-
 textarea {
 	background-color: white;
+	width: 600px;
+	height: 120px;
+	border: 3px solid #cccccc;
+	padding: 10px;
+	font-family: Tahoma, sans-serif;
+	font-size : 16px;
 }
 
 .button {
@@ -37,56 +46,56 @@ textarea {
 	text-align: center;
 	text-decoration: none;
 	outline: none;
-	color: #fff;
-	background-color: #28B463;
+	color: red;
+	background-color: white;
 	border: none;
 	border-radius: 15px;
 	box-shadow: 0 3px #CFA7B2;
 }
 
 .button:hover {
-	background-color: #F4D03F
+	background-color: yellow;
+	color: white;
 }
 
 .button:active {
-	background-color: #A9DFBF;
-	box-shadow: 0 5px #666;
+	background-color: red;
+	color: white;
+	box-shadow: 0 5px #DCDCDC;
 	transform: translateY(4px);
-}
 </style>
 </head>
 <body>
 	<script type="text/javascript" src="TypeTester.js">
 		
 	</script>
-	<table>
+	<table align="center">
 	<tr>
-		<td><img style="width: 205px; height: 158px;" src="TypeYouUp.png" /></td>
-		<td><h1>Testing Your Typing Skill</h1></td>
+		<td><img style="width: 205px; height: 158px;" src="TypeYouUp.png" /></td><td><img style="width: 600px; height: 138px;" src = "banner.png"></td>
 	</tr>
 	</table>
-	<div id="toolbar">
-		<table>
+	<div id="toolbar" >
+		<table align="center">
 			<tr>
 				<td><select id="mode">
 						<option value="Customize">Customize</option>
 						<option value="Default">Default</option>
-				</select> <font size="3" color="black">Text Mode</font></td>
-				<td><select id="time">
+				</select> <font size="3" color="white">Text Mode</font>
+				<select id="time">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
-				</select> <font size="3" color="black">Minutes</font></td>
+				</select> <font size="3" color="white">Minutes</font></td>
 				<td>
-					<button type="button" id="submitChoice">Set Up then press confirm</button>
+					<button class = "button" type="button" id="submitChoice">Set Up then Press Confirm</button>
 				</td>
 			</tr>
-		</table>
+		<tr>
+		<th><textarea class = "article_area" id="article_area" disabled rows="10" cols="70"></textarea></th>
+
+		<th><button class = 'button' type="button" id="submit_text">Confirm</button></th>
+	</tr>
+	</table>
 	</div>
-	<div id="customize_text_input">
-		<textarea id="article_area" disabled rows="10" cols="70"></textarea>
-		<p></p>
-		<button class = 'button' type="button" id="submit_text">Confirm</button>
-	</div>
-</body>
+	</body>
 </html>

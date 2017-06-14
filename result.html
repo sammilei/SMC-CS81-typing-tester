@@ -5,15 +5,29 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>Testing Your Typing Skill</title>
 <style>
+body {
+	background-color: #5F9EA0;
+	background-image: url(bg.png);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}
+
 table {
 	border-collapse: collapse;
-	width: 100%;
+	width: 35%;
 }
 
 th, td {
-	padding: 8px;
+	padding: 5px;
 	text-align: left;
 	border-bottom: 1px solid #ddd;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 17 px;
+	color: yellow;
+}
+
+div {
+	position: relative;
 }
 
 .button {
@@ -24,29 +38,36 @@ th, td {
 	text-align: center;
 	text-decoration: none;
 	outline: none;
-	color: #fff;
-	background-color: #28B463;
+	color: red;
+	background-color: white;
 	border: none;
 	border-radius: 15px;
 	box-shadow: 0 3px #CFA7B2;
 }
 
 .button:hover {
-	background-color: #F4D03F
+	background-color: yellow;
+	color: white;
 }
 
 .button:active {
-	background-color: #A9DFBF;
-	box-shadow: 0 5px #666;
+	background-color: red;
+	color: white;
+	box-shadow: 0 5px #DCDCDC;
 	transform: translateY(4px);
 }
+
+p {
+	color: white;
+	font-family : "Comic Sans MS", cursive, sans-serif;
+	font-size: 18px;
+}
+
 </style>
 </head>
 
 <body>
-
-	<form>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function() {
 			//get local stored valus 
 			var accuracy = sessionStorage.getItem('accuracy');
@@ -55,38 +76,39 @@ th, td {
 			$('#error').text(error + " words/min");
 			$('#accuracy').text(accuracy + " words/min");
 		});
-		
+
 		function toIndexPage() {
-			window.location.replace("index.html");          
-        }
-		</script>
-		<table>
+			window.location.replace("index.html");
+		}
+	</script>
+	<form>
+		<table align="center">
 			<tr>
 				<td><img style="width: 205px; height: 158px;"
 					src="TypeYouUp.png" /></td>
-				<td><h1>Testing Your Typing Skill</h1></td>
+				<td><img style="width: 600px; height: 138px;" src="banner.png"></td>
 			</tr>
 		</table>
 		<div>
-			<table>
+			<table align="center">
 				<tr>
-					<td>error:
+					<td colspan="2">error:
 						<p id="error"></p>
 					</td>
 				</tr>
 				<tr>
-					<td>accuracy:
+					<td colspan="2">accuracy:
 						<p id="accuracy"></p>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<button class='button'
-							onclick="toIndexPage(); return false;">Retry</button>
+						<button class='button' onclick="toIndexPage(); return false;">Retry</button>
 					</td>
 				</tr>
 			</table>
 		</div>
+
 	</form>
 
 </body>

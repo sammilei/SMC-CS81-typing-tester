@@ -1,0 +1,47 @@
+<html>
+<head>
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	
+</script>
+<script type="text/javascript">
+	var finished_one_word = false;
+	$(document).ready(function() {
+
+		$("#yue").keyup(function(e) {
+			if (e.keyCode == 32) {
+				finished_one_word = true;
+			}
+		});
+		$("#yue").on('keyup', function() {
+			if (finished_one_word == true) {
+				var text = "";
+				//var n = parseInt($(this).val().replace(/\D/g,''),10);
+				var input_arr = $("#yue").val().trim().split(/\s+/);
+
+				for (var i = 0; i < input_arr.length; i++) {
+					if (input_arr[i] == 'yes') {
+						text += "<u>" + input_arr[i] + "</u>";
+					} else {
+						text += input_arr[i];
+					}
+					text += " ";
+				}
+
+				$(this).val(text);
+				$(this).focus();
+				$('#debug').text(input_arr);
+				finished_one_word = false;
+			}
+		});
+	});
+</script>
+</head>
+<body>
+
+	<textarea id="yue" value = "<u>well</u>"></textarea>
+	<p id='debug'></p>
+</body>
+</head>
+</html>
