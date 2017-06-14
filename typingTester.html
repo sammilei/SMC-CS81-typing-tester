@@ -40,8 +40,13 @@ th, td {
 }
 
 textarea {
-	background-color: white;
-	font-size: 20 px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    background-color: #f8f8f8;
+    resize: none;
+    font-size: 90%;
 }
 </style>
 </head>
@@ -51,8 +56,7 @@ textarea {
 	</script>
 	<table>
 		<tr>
-			<td ><img style="width: 146px; height: 46px;"
-				src="http://cdn-ak.f.st-hatena.com/images/fotolife/n/nisemono_san/20160404/20160404134709.png" /></td>
+			<td ><img style="width: 205px; height: 158px;" src="TypeYouUp.png" /></td>
 			<td style = "text-align: center"><h1>Testing Your Typing Skill</h1></td>
 		</tr>
 	</table>
@@ -68,17 +72,21 @@ textarea {
 					<td><label id="speed">0</label><font size="3" color="blue">words/mins</font></td>
 				</tr>
 				<tr>
-					<td>Error</td>
+					<td>Current Error</td>
 					<td><label id="error">0</label></td>
+				</tr>
+				<tr>
+					<td>Total Errors</td>
+					<td><label id="total_error">0</label></td>
 				</tr>
 			</table>
 		</div>
 		<div id="right_main">
-			<div id="article2follow">
-			<!-- text update area -->
+			<div id="article2follow" style="overflow: auto; width:700px; height:200px;">
 			</div>
+			<br>
 			<div id="typingLines">
-				<textarea id="typing" rows="2" cols="130">starting typing when you are ready!</textarea>
+				<textarea id="typing" rows="2" cols="70">starting typing when you are ready!</textarea>
 
 				<p id='debug'>Debug message:</p>
 			</div>

@@ -6,10 +6,10 @@ var default_article = "Points to remember. Preheat oven and a baking sheet to 22
 "or cured meats), place the floured sheet on top of the preheated sheet and bake for 10-15 mins, until the pizza is golden and crispy." + "";
 var text_article;
 var input_by_word, typing_input;
-var article_by_word, typeIn_by_word;
+var article_by_word, typeIn_by_word = [];
 var time_selected;
 var mode_selected;
-var typingSpeed, num_of_error = 0, accuracy, remaining_time;
+var typingSpeed, num_of_error = 0, remaining_time;
 var start_input = true;
 var click_2_start = true;
 var finished_one_word = false;
@@ -18,6 +18,7 @@ window.setInterval(function() {}, 20000);//for courting down
 
 var text_article = sessionStorage.getItem('text_article');
 time_selected = sessionStorage.getItem('time_selected');
+var total_error = new Set();//store all error words index. 
 
 $(document).ready(function() {
 	/**
@@ -69,7 +70,14 @@ $(document).ready(function() {
 	/**
 	 * typingTest.html
 	 */	
-//	$("#article").text(text_article);
+	
+	/**
+	 * disable cut copy paste functions
+	 */
+	 $('#typing').bind("cut copy paste",function(e) {
+	      e.preventDefault();
+	   });
+	 
 	$("#article2follow").html(text_article);
 	$("#typing").click(function() {
 		if(click_2_start == true){
@@ -92,34 +100,24 @@ $(document).ready(function() {
 				if(remaining_time <= 0){
 					clearInterval(countdown);//clear the setInterval
 					//store result for the result page
-					sessionStorage.setItem("accuracy", accuracy);
-					sessionStorage.setItem("error", num_of_error);
+					sessionStorage.setItem("accuracy", $('#speed').text());
+					sessionStorage.setItem("error", $('#total_error').text());
 					//direct to result page 
 					window.location.replace("result.html");
 				}else{
 					$("#timeLeft").text(remaining_time);
 					if(finished_one_word == true){//only process once a complete word is done by recognizing the space bar is pressed
-						typeIn_by_word = $("#typing").val().trim().split(/\s+/);
-				
-						
+						typeIn_by_word = $("#typing").val().trim().split(/\s+/);						
 						comparingTyping();
 						$("#article").text("");
-						//$("#article").append(new_text);
 						$("#article2follow").html(new_text);
-						
-						
-						
-//						$("#typing").text("");
-						//$("#typing").append(new_typeIn);
-						//reset the cursor position
-//						$('textarea').focus();
-//						$('textarea').val($('textarea').val() + ' ');
 
 						//update the evaluation session
 						$("#error").text(num_of_error);
+						$('#speed').text(get_accurary());
+						$('#total_error').text(total_error.size/time_selected);
 						finished_one_word = false;//reset the word completion detection
 					}
-					$('#speed').text(get_accurary());
 				}
 			}, 1000);
 		}
@@ -134,8 +132,7 @@ $(document).ready(function() {
 
 var accuracy;
 function get_accurary(){
-	accuracy = parseInt((typeIn_by_word.length - num_of_error)/(parseInt(time_selected)*60 - remaining_time)*60);
-	return accuracy;
+	return parseInt((typeIn_by_word.length - num_of_error)/parseInt(time_selected*60 - remaining_time)*60);
 }
 /**
  * to compare the article and input texts
@@ -147,11 +144,11 @@ var new_text;
 var new_typeIn;
 function comparingTyping(){
 	var text_for_article = "";//next formatted text
-//	var text_for_input = "";
 	var error = 0;//error counter
 	for(var i = 0; i < typeIn_by_word.length; i++){
 		if(typeIn_by_word[i] != article_by_word[i]){
 			error ++;
+			total_error.add(i);
 			text_for_article += "<span style='color:red'>" + article_by_word[i] + "</span>" + " " ;
 		}else{
 			//color each finished word
@@ -173,5 +170,4 @@ function comparingTyping(){
 	new_text = text_for_article;
 	new_typeIn = $('#typing');//
 }
-
 
