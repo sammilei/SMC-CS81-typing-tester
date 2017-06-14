@@ -1,9 +1,8 @@
-var default_article = "Points to remember. Preheat oven and a baking sheet to 220C/fan 200C. Mix strong bread flour, " +
-"salt and fast-action yeast together in a large bowl. Quickly stir in lukewarm water and olive oil and bring " +
-"together to a rough dough. Tip out the mixture onto a lightly floured worksurface and knead for 5 mins until " +
-"you have a smooth, springy dough. Roll out into a thin round (you may have to stretch it with your hands a little) " +
-"and place on a floured baking sheet. Add your favourite toppings (such as tomato passata, mozzarella, vegetables " +
-"or cured meats), place the floured sheet on top of the preheated sheet and bake for 10-15 mins, until the pizza is golden and crispy." + "";
+var default_article = "The word dinosaur comes from the Greek language and means 'terrible lizard'. The word was coined by English paleontologist Richard Owen in 1842 and was meant" +
+" to refer to Dinosaurs impressive size rather than their scary appearance. Dinosaurs ruled the Earth for over 160 million years, from the Triassic period around 230 million years ago"+
+" through the Jurassic period and until the end of the Cretaceous period around 65 million years ago. The time period from 250 million years ago until around 65 million years ago is" + 
+" known as the Mesozoic Era. It is often referred to as the Age of the Dinosaurs because most dinosaurs developed and became extinct during this time.It is believed that dinosaurs" +
+" lived on Earth until around 65 million years ago when a mass extinction occurred.";
 var text_article;
 var input_by_word, typing_input;
 var article_by_word, typeIn_by_word = [];
@@ -106,28 +105,19 @@ $(document).ready(function() {
 					window.location.replace("result.html");
 				}else{
 					$("#timeLeft").text(remaining_time);
-					if(finished_one_word == true){//only process once a complete word is done by recognizing the space bar is pressed
-						typeIn_by_word = $("#typing").val().trim().split(/\s+/);						
-						comparingTyping();
-						$("#article").text("");
-						$("#article2follow").html(new_text);
+					typeIn_by_word = $("#typing").val().trim().split(/\s+/);						
+					comparingTyping();
+					$("#article").text("");
+					$("#article2follow").html(new_text);
 
-						//update the evaluation session
-						$("#error").text(num_of_error);
-						$('#speed').text(get_accurary());
-						$('#total_error').text(total_error.size/time_selected);
-						finished_one_word = false;//reset the word completion detection
-					}
+					//update the evaluation session
+					$("#error").text(num_of_error);
+					$('#speed').text(get_accurary());
+					$('#total_error').text(total_error.size/time_selected);
 				}
 			}, 1000);
 		}
-	});	
-
-	$("#typing").keydown(function(e){
-		if(e.keyCode == 32){
-			finished_one_word = true;
-		}
-	});	
+	});		
 });
 
 var accuracy;
@@ -146,17 +136,19 @@ function comparingTyping(){
 	var text_for_article = "";//next formatted text
 	var error = 0;//error counter
 	for(var i = 0; i < typeIn_by_word.length; i++){
+		if(i == typeIn_by_word.length - 1){
+			//color ongoing word
+			text_for_article += "<span style='color: yellowgreen'>" + article_by_word[i] + "</span>" + " ";
+			text_for_article += "<span style='color:blue'>" + article_by_word[i + 1] + "</span>" + " ";
+			break;
+		}
 		if(typeIn_by_word[i] != article_by_word[i]){
 			error ++;
 			total_error.add(i);
 			text_for_article += "<span style='color:red'>" + article_by_word[i] + "</span>" + " " ;
 		}else{
 			//color each finished word
-			text_for_article += "<span style='color:grey'>" + article_by_word[i] + "</span>" + " ";
-		}
-		if(i == typeIn_by_word.length - 1){
-			//color ongoing word
-			text_for_article += "<span style='color:blue'>" + article_by_word[i + 1] + "</span>" + " ";
+			text_for_article += "<span style='color:lightgrey'>" + article_by_word[i] + "</span>" + " ";
 		}
 	}
 
